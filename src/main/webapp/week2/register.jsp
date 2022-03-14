@@ -113,7 +113,7 @@
 </head>
 <body>
 <div class="login">
-    <form action="${pageContext.request.contextPath}/hello" align="center" name="form1" method="post" onsubmit="return on_submit()">
+    <form action="${pageContext.request.contextPath}/register" align="center" name="form1" method="post" onsubmit="return on_submit()"><!--within do post() in servlet-->
         <h2>New User Registration!</h2><br>
         <div class="login_box">
             <input type="text"  name="Username"id="1" placeholder="Username" >
