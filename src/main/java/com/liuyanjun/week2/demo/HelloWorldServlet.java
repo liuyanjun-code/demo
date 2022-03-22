@@ -1,4 +1,4 @@
-package com.liuyanjun_week2_demo;
+package com.liuyanjun.week2.demo;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
