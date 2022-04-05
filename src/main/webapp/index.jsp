@@ -9,6 +9,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@include file="header.jsp"%>
+<h2>Welcome come to My Online Shop Home page<h2>
+<form method="get" target="_blank" action="search">
+    <input type="text" name="text" size=30/>
+    <select>
+        <option value="baidu">Baidu</option>
+        <option value="bing">Bing</option>
+        <option value="google">Google</option>
+    </select>
+    <input type="submit" value="search"/>
+</form>
+
 <h1>Welcome come to my home page</h1>
 <br/>
 <a href="HelloREsoure">Hello servlet-week1</a>

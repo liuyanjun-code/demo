@@ -19,19 +19,26 @@ public class RegisterServlet extends HttpServlet {
     //rs 为 resultset
     @Override
     public void init() throws ServletException {
-        ServletContext application = getServletConfig().getServletContext();
+        super.init();
+       /* ServletContext application = getServletConfig().getServletContext();
         String driver = application.getInitParameter("driver");
         String url = application.getInitParameter("url");
-        String username = application.getInitParameter("username");
-        String password = application.getInitParameter("password");
+        String username = application.getInitParameter("Username");
+        String password = application.getInitParameter("Password");
         try {
             Class.forName(driver);
             conn = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        }
-    }
+        }*/
+        conn=(Connection) getServletContext().getAttribute("conn");//name of attribute
 
+
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        doPost(request,response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -41,9 +48,9 @@ public class RegisterServlet extends HttpServlet {
         //get parameter from requester
 
         String username = request.getParameter("Username");//name of input type -<input type="text" name="username">
-        String password = request.getParameter("Password");
+        String password = request.getParameter("password");
         String email = request.getParameter("Email");
-        String gender = request.getParameter("Gender");
+        String gender = request.getParameter("gender");
         String birthday = request.getParameter("Birthday");
 
         //print - write into response
@@ -60,28 +67,28 @@ public class RegisterServlet extends HttpServlet {
 //        out.print("<br> Birthday :" + birthday);
 //        out.close();
 
-        out.print("        <!DOCTYPE html>");
-        out.print("<html>");
-        out.print("    <head>");
-        out.print("        <meta charset='UTF-8'>");
-        out.print("        <title>UserList</title>");
-
-        out.print("    </head>");
-        out.print("    <body>");
-        out.print("        <h1 align='center'>UserList</h1>");
-        out.print("        <hr>");
-        out.print("        <table border='2px' align='center' width='50%'>");
-        out.print("            <tr>");
-        out.print("                <th>ID</th>");
-        out.print("                <th>Username</th>");
-        out.print("                <th>Password</th>");
-        out.print("                <th>Email</th>");
-        out.print("                <th>Gender</th>");
-        out.print("                <th>Birthday</th>");
-        out.print("            </tr>");
+//        out.print("        <!DOCTYPE html>");
+//        out.print("<html>");
+//        out.print("    <head>");
+//        out.print("        <meta charset='UTF-8'>");
+//        out.print("        <title>UserList</title>");
+//
+//        out.print("    </head>");
+//        out.print("    <body>");
+//        out.print("        <h1 align='center'>UserList</h1>");
+//        out.print("        <hr>");
+//        out.print("        <table border='2px' align='center' width='50%'>");
+//        out.print("            <tr>");
+//        out.print("                <th>ID</th>");
+//        out.print("                <th>Username</th>");
+//        out.print("                <th>Password</th>");
+//        out.print("                <th>Email</th>");
+//        out.print("                <th>Gender</th>");
+//        out.print("                <th>Birthday</th>");
+//        out.print("            </tr>");
 
         try {
-            String sql1 = "insert into userdb(Id, Username, Password, Email, Gender, Birthday) values(?,?,?,?,?,?)";
+            String sql1 = "insert into information(ID, username, password, email, gender, birthdate) values(?,?,?,?,?,?)";
             ps = conn.prepareStatement(sql1);
             ps.setString(1, "1");
             ps.setString(2, username);
@@ -92,7 +99,7 @@ public class RegisterServlet extends HttpServlet {
             int num = ps.executeUpdate();
             //out.print(num);
 
-
+            /*
             String sql2 = "select * from userdb";
             ps = conn.prepareStatement(sql2);
             rs = ps.executeQuery();
@@ -113,6 +120,10 @@ public class RegisterServlet extends HttpServlet {
                 out.print("                <td>" + birthday2 + "</td>");
                 out.print("            </tr>");
             }
+
+             */
+            //after register a new user -user can login
+            response.sendRedirect("login.jsp");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -140,16 +151,13 @@ public class RegisterServlet extends HttpServlet {
         }
 
         /* 以下是固定的 */
-        out.print("        </table>");
-        out.print("        <hr>");
-        out.print("    </body>");
-        out.print("</html>");
+//        out.print("        </table>");
+//        out.print("        <hr>");
+//        out.print("    </body>");
+//        out.print("</html>");
 
-        out.close();
+//        out.close();
     }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
-            ServletException, IOException {
 
-    }
 
 }

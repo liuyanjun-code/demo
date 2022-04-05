@@ -17,8 +17,8 @@
             <input type="date" name="Birthdate" placeholder="Birthday" ><br>
         </div>
         <div class="Login_Box2">
-            <strong>Gender</strong> <input type="radio" name="gender" value="男">Male
-            <input type="radio" name="gender" value="女">Female<br>
+            <strong>Gender</strong> <input type="radio" name="gender" value="male">Male
+            <input type="radio" name="gender" value="female">Female<br>
         </div>
         <br><br><br>
         <input type="submit" class="Login_Box3" value="register" >

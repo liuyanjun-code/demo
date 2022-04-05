@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
+        /*
         ServletContext application = getServletConfig().getServletContext();
         String driver = application.getInitParameter("driver");
         String url = application.getInitParameter("url");
@@ -32,28 +33,46 @@ public class LoginServlet extends HttpServlet {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+         */
+        //only one line here
+        conn = (Connection) getServletContext().getAttribute("conn");
+    }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        doPost(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = request.getParameter("Username");
+        String password = request.getParameter("Password");
 
-        response.setContentType("text/html;charset=UTF-8");
+        //response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        String sql = "Select * from usertable where username = ? and password = ?";
+        String sql = "Select ID,Username,Password,Email,Gender,birthdate from userdb where username="+username+" and password="+password;
         try {
+            ResultSet rs=conn.createStatement().executeQuery(sql);
             ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            ps.setString(2, password);
             rs = ps.executeQuery();
             if (rs.next()){
-                out.print("Login Success!!! <br>");
-                out.print("Welcome,"+ username +" <br>");
+                //week5 code
+                //out.print("Login Success!!! <br>");
+                //out.print("Welcome,"+ username +" <br>");
+                //get from rs and set into request attribute
+                request.setAttribute("Id",rs.getInt("id"));
+                request.setAttribute("Username",rs.getString("username"));
+                request.setAttribute("Password",rs.getString("password"));
+                request.setAttribute("Email",rs.getString("email"));
+                request.setAttribute("Gender",rs.getString("gender"));
+                request.setAttribute("Birthdate",rs.getString("birthdate"));
+                request.getRequestDispatcher("userInfo.jsp").forward(request,response);
             }else{
-                out.print("Login Error!!! <br>");
+                //out.print("Login Error!!! <br>");
+                request.setAttribute("meassage","Username or Password Error!!!");
+                request.getRequestDispatcher("login.jsp").forward(request,response);
             }
         } catch (SQLException e) {
             e.printStackTrace();
