@@ -1,6 +1,10 @@
 package com.liuyanjun.week5.demo;
 
 
+import com.liuyanjun.dao.UserDao;
+import com.liuyanjun.model.User;
+
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,19 +44,40 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
-        doPost(request,response);
+        request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
         String username = request.getParameter("Username");
         String password = request.getParameter("Password");
 
         //response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
 
-        String sql = "Select ID,Username,Password,Email,Gender,birthdate from userdb where username="+username+" and password="+password;
+        //now move jdbc in dao-mvc design
+        //write mvc code
+        //use model and dao
+        UserDao userDao=new UserDao();
+        try {
+            User user= userDao.findByUsernamePassword(conn,username,password);//use for login
+            if (user!=null){
+                //valid
+                //set user into request
+                request.setAttribute("user",user);
+                request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
+            }else{
+                //invalid
+                request.setAttribute("meassage","Username or Password Error!!!");
+                request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request,response);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //forward jsp
+
+        String sql = "Select ID,username,password,email,gender,birthdate from userdb where username="+username+" and password="+password;
         try {
             ResultSet rs=conn.createStatement().executeQuery(sql);
             ps = conn.prepareStatement(sql);
