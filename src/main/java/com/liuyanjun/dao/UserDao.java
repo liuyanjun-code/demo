@@ -18,7 +18,7 @@ public class UserDao implements IUserDao{
 
         String sql = "insert into register(id, username, password, email, gender, birthdate) values (?,?,?,?,?,?);";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
-        preparedStatement.setString(1,user.getId());
+        preparedStatement.setString(1,user.getID());
         preparedStatement.setString(2, user.getUsername());
         preparedStatement.setString(3, user.getPassword());
         preparedStatement.setString(4, user.getEmail());
@@ -32,9 +32,13 @@ public class UserDao implements IUserDao{
     public int deleteUser(Connection conn, User user) throws SQLException {
         String sql = "delete from register where id = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1,user.getId());
+        ps.setString(1,user.getID());
         ps.executeUpdate();
         return 0;
+        //TODO 5.1-write update sql where id=?
+        //TODO 5.2-create prepared statement
+        //TODO 5.2-executeUpdate()
+        //TODO 5.3 return int
     }
 
     @Override
@@ -43,7 +47,7 @@ public class UserDao implements IUserDao{
                 ", password = "+user.getPassword()+
                 ", email = "+user.getEmail()+
                 ", gender = "+user.getGender()+
-                ", birthdate = "+user.getBirthdate()+" where id="+user.getId();
+                ", birthdate = "+user.getBirthdate()+" where id="+user.getID();
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.executeUpdate();
         return 0;
@@ -59,7 +63,7 @@ public class UserDao implements IUserDao{
         User user = null;
         if (rs.next()){
             user = new User();
-            user.setId(rs.getString("id"));
+            user.setID(rs.getString("id"));
             user.setUsername(rs.getString("username"));
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
@@ -79,7 +83,7 @@ public class UserDao implements IUserDao{
         User user = null;
         if (rs.next()){
             user = new User();
-            user.setId(rs.getString("id"));
+            user.setID(rs.getString("id"));
             user.setUsername(rs.getString("username"));
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
@@ -98,7 +102,7 @@ public class UserDao implements IUserDao{
         User user = new User();
         List<User> list = new ArrayList<User>();
         while (rs.next()){
-            user.setId(rs.getString("id"));
+            user.setID(rs.getString("id"));
             user.setUsername(rs.getString("username"));
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
@@ -118,7 +122,7 @@ public class UserDao implements IUserDao{
         User user = new User();
         List<User> list = new ArrayList<User>();
         while (rs.next()){
-            user.setId(rs.getString("id"));
+            user.setID(rs.getString("id"));
             user.setUsername(rs.getString("username"));
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
@@ -138,7 +142,7 @@ public class UserDao implements IUserDao{
         User user = new User();
         List<User> list = new ArrayList<User>();
         while (rs.next()){
-            user.setId(rs.getString("id"));
+            user.setID(rs.getString("id"));
             user.setUsername(rs.getString("username"));
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
@@ -158,7 +162,7 @@ public class UserDao implements IUserDao{
         User user = new User();
         List<User> list = new ArrayList<User>();
         while (rs.next()){
-            user.setId(rs.getString("id"));
+            user.setID(rs.getString("id"));
             user.setUsername(rs.getString("username"));
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
@@ -178,7 +182,7 @@ public class UserDao implements IUserDao{
         User user = new User();
         List<User> list = new ArrayList<User>();
         while (rs.next()){
-            user.setId(rs.getString("id"));
+            user.setID(rs.getString("id"));
             user.setUsername(rs.getString("username"));
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
@@ -197,7 +201,7 @@ public class UserDao implements IUserDao{
         User user = new User();
         List<User> list = new ArrayList<User>();
         while (rs.next()){
-            user.setId(rs.getString("id"));
+            user.setID(rs.getString("id"));
             user.setUsername(rs.getString("username"));
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));

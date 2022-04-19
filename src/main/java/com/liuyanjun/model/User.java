@@ -3,7 +3,7 @@ package com.liuyanjun.model;
 import java.util.Date;
 
 public class User {
-    private int ID;
+    private String ID;
     private String username;
     private String password;
     private String email;
@@ -14,7 +14,7 @@ public class User {
     public User() {
 
     }
-    public User(int ID, String username, String password, String email, String gender, Date birthdate) {
+    public User(String ID, String username, String password, String email, String gender, Date birthdate) {
         this.ID = ID;
         this.username = username;
         this.password = password;
@@ -24,11 +24,11 @@ public class User {
     }
 
     //getter and setter
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -84,6 +84,5 @@ public class User {
                 ", birthdate=" + birthdate +
                 '}';
     }
-
 
 }
