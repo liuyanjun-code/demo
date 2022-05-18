@@ -29,11 +29,7 @@ public class ProductListServlet extends HttpServlet {
 
         ProductDao productDao = new ProductDao();
         List<Product> productList = null;
-        try {
-            productList = productDao.findAll(con);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        productList = productDao.findAll(con);
         request.setAttribute("productList", productList);
 
         String path = "/WEB-INF/views/admin/productList.jsp";
