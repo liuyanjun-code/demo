@@ -1,4 +1,4 @@
-package com.liuyanjun.lab1;
+package com.lab1;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,10 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
 
 @WebServlet(name = "LifeCycleServlet",value = "/life")
-public class LifeCycleServlet extends HttpServlet {
+public class Assignment1 extends HttpServlet {
 
     private int i = 0;
 

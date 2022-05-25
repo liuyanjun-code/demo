@@ -1,4 +1,6 @@
-package com.liuyanjun.lab1;
+package com.lab1;
+
+
 
 
 import javax.servlet.ServletException;
