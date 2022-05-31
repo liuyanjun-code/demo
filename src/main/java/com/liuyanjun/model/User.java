@@ -89,4 +89,13 @@ public class User {
     public void setBirthDate(java.sql.Date birthDate) {
         this.birthDate = birthDate;
     }
+
+    public Object getBirthDate() {
+        return birthDate;
+    }
+
+    public Object getId() {
+        Object id = null;
+        return id;
+    }
 }

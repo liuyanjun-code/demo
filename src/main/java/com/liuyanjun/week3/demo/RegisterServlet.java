@@ -123,7 +123,8 @@ public class RegisterServlet extends HttpServlet {
 
              */
             //after register a new user -user can login
-            response.sendRedirect("login.jsp");
+            request.setAttribute("message", "User Registered Successfully!");
+            request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
